@@ -43,7 +43,7 @@ function modifyBook() {
     myLibrary[currentBookIndex].title = modifyBookForm.querySelector("#title").value;
     myLibrary[currentBookIndex].author = modifyBookForm.querySelector("#author").value;
     myLibrary[currentBookIndex].pageno = modifyBookForm.querySelector("#pageno").value;
-    myLibrary[currentBookIndex].read = modifyBookForm.querySelector("#read").value;
+    myLibrary[currentBookIndex].read = modifyBookForm.querySelector("#read").checked;
     updateBookCard(currentBookIndex);
     modifyBookForm.close();
 }
@@ -52,11 +52,13 @@ function updateBookCard(index) {
     // get index of current book as a child of library
     const bookCard = library.children[index];
     const book = myLibrary[index];
+    const readElement = bookCard.querySelector(".read");
 
     bookCard.querySelector(".title").innerText = book.title;
     bookCard.querySelector(".author").innerText = `Author: ${book.author}`;
     bookCard.querySelector(".pageno").innerText = `Number of Pages: ${book.pageno}`;
-    bookCard.querySelector(".read").innerText = getread(book);
+    readElement.innerText = getread(book);
+    readElement.setAttribute("data-read", book.read); // Set data-read attribute
 }
 
 function fillForm(form, book) {
@@ -101,6 +103,7 @@ function renderBookCard(book) {
     author.innerText = `Author: ${book.author}`;
     pageno.innerText = `Number of Pages: ${book.pageno}`;
     read.innerText = getread(book);
+    read.setAttribute("data-read", book.read); // Set data-read attribute
     deleteButton.innerText = 'Remove Book';
     editButton.innerText = 'Edit Book Info';
 
