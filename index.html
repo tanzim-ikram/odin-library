@@ -22,17 +22,21 @@
 
         <dialog class="new-book-popup">
             <form class="new-book-form">
-                <label for="title">Title</label>
-                <input type="text" id="title" required>
-                <label for="author">Author</label>
-                <input type="text" id="author">
-                <label for="pageno">Number of Pages</label>
-                <input type="number" id="pageno" min="1" step="1">
+                <label for="title">Title</label> <br>
+                <input type="text" id="title" required> <br>
+                <label for="author">Author</label> <br>
+                <input type="text" id="author"> <br>
+                <label for="pageno">Number of Pages</label> <br>
+                <input type="number" id="pageno" min="1" step="1"> <br>
                 <label for="read">Read</label>
-                <input type="checkbox" id="read">
-                <button type="submit" class="submit-form-btn">Add to Library</button>
-                <button formmethod="dialog" formnovalidate class="close-form-btn">Close</button>
-                <button type="reset" class="reset-form-btn">Reset</button>
+                <input type="checkbox" id="read"> <br>
+                <div class="submit-btn-container">
+                    <button type="submit" class="submit-form-btn">Add to Library</button>
+                </div>
+                <div class="btn-container">
+                    <button formmethod="dialog" formnovalidate class="close-form-btn">Close</button>
+                    <button type="reset" class="reset-form-btn">Reset</button>
+                </div>
             </form>
         </dialog>
 
@@ -46,9 +50,13 @@
                 <input type="number" id="pageno" min="1" step="1">
                 <label for="read">Read</label>
                 <input type="checkbox" id="read">
-                <button type="submit" class="submit-form-btn">Save</button>
-                <button formmethod="dialog" formnovalidate class="close-form-btn">Close</button>
-                <button type="reset" class="reset-form-btn">Reset</button>
+                <div class="submit-btn-container">
+                    <button type="submit" class="submit-form-btn">Save</button>
+                </div>
+                <div class="btn-container">
+                    <button formmethod="dialog" formnovalidate class="close-form-btn">Close</button>
+                    <button type="reset" class="reset-form-btn">Reset</button>
+                </div>
             </form>
         </dialog>
 
