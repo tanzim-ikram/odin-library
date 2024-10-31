@@ -11,11 +11,47 @@ body {
     /* background-color: rgb(114, 108, 108); */
 }
 
+dialog {
+    transform: translateX(-50%);
+    left: 50%;
+    top: 40%;
+    padding: 1.6rem;
+    max-width: 400px;
+    background-color: white;
+    border: none !important;
+    border-radius: 8px;
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+label, input {
+    font-size: 1.1rem;
+}
+
+input, button {
+    margin-bottom: 10px;
+}
+
+
+
 .container {
     height: 100vh;
     display: grid;
     grid-template-rows: 1fr 5fr;
 }
+
+.submit-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
 
 .header {
     display: flex;
@@ -33,7 +69,9 @@ body {
     display: flex;
 }
 
-/* .library {
+
+
+.library {
     padding: 10px;
     display: grid;
     gap: 10px;
@@ -53,19 +91,9 @@ body {
 .book ul {
     list-style-type: none;
     padding: 0;
-} */
-
-dialog {
-    transform: translateX(-50%);
-    left: 50%;
-    top: 50%;
-    width: 250px;
-    padding: 20px;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+
 
 .new-book-btn {
     margin: 30px 40px 30px;
