@@ -4,19 +4,19 @@ const modifyBookForm = document.querySelector(".modify-book-popup");
 const library = document.querySelector(".library");
 let currentBookIndex;
 
-function Book(title, author, pages, readStatus) {
+function Book(title, author, pageno, read) {
     this.title = title;
     this.author = author;
-    this.pages = pages;
-    this.readStatus = readStatus;
+    this.pageno = pageno;
+    this.read = read;
 }
 
 function addBookToLibrary() {
     // create new book objects
     const newBook = new Book(
-        newBookForm.querySelector("#title").value, 
-        newBookForm.querySelector("#author").value, 
-        newBookForm.querySelector("#pageno").value, 
+        newBookForm.querySelector("#title").value,
+        newBookForm.querySelector("#author").value,
+        newBookForm.querySelector("#pageno").value,
         newBookForm.querySelector("#read").checked
     );
     // save object to array
@@ -29,19 +29,7 @@ function addBookToLibrary() {
     newBookForm.close();
 }
 
-// const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, "yes");
-// console.log(book1.info());
-// myLibrary.push(book1);
-
-// const book2 = new Book('1984', 'George Orwell', 328, "no");
-// console.log(book2.info());
-// myLibrary.push(book2);
-
-// // console.log(myLibrary);
-
-// addBookToLibrary();
-
-function showModifyForm (book) {
+function showModifyForm(book) {
     // retrieve index for current book
     currentBookIndex = myLibrary.indexOf(book);
     // pre-fill forms
@@ -50,46 +38,46 @@ function showModifyForm (book) {
     modifyBookForm.showModal();
 }
 
-function modifyBook () {
+function modifyBook() {
     // update existing book in 'myLibrary' array
     myLibrary[currentBookIndex].title = modifyBookForm.querySelector("#title").value;
     myLibrary[currentBookIndex].author = modifyBookForm.querySelector("#author").value;
-    myLibrary[currentBookIndex].pages = modifyBookForm.querySelector("#pageno").value;
-    myLibrary[currentBookIndex].readStatus = modifyBookForm.querySelector("#read").value;
+    myLibrary[currentBookIndex].pageno = modifyBookForm.querySelector("#pageno").value;
+    myLibrary[currentBookIndex].read = modifyBookForm.querySelector("#read").value;
     updateBookCard(currentBookIndex);
     modifyBookForm.close();
 }
 
-function updateBookCard (index) {
+function updateBookCard(index) {
     // get index of current book as a child of library
     const bookCard = library.children[index];
     const book = myLibrary[index];
 
     bookCard.querySelector(".title").innerText = book.title;
     bookCard.querySelector(".author").innerText = `Author: ${book.author}`;
-    bookCard.querySelector(".pageno").innerText = `Number of pages: ${book.pageno}`;
-    bookCard.querySelector(".read").innerText = getReadStatus(book);
+    bookCard.querySelector(".pageno").innerText = `Number of Pages: ${book.pageno}`;
+    bookCard.querySelector(".read").innerText = getread(book);
 }
 
-function fillForm (form, book) {
+function fillForm(form, book) {
     form.querySelector("#title").value = book.title;
     form.querySelector("#author").value = book.author;
     form.querySelector("#pageno").value = book.pageno;
     form.querySelector("#read").checked = book.read;
 }
 
-function clearForm (form) {
+function clearForm(form) {
     form.querySelector("#title").value = '';
     form.querySelector("#author").value = '';
     form.querySelector("#pageno").value = '';
     form.querySelector("#read").checked = false;
 }
 
-function getReadStatus (book) {
-    return book.readStatus ? `Read status: read` : `Read status: not read`;
+function getread(book) {
+    return book.read ? `Read Yet?: Yes` : `Read Yet?: No`;
 }
 
-function removeBook (bookCard) {
+function removeBook(bookCard) {
     // get index of current book as a child of library
     const index = Array.prototype.indexOf.call(library.children, bookCard);
     // remove book from 'myLibrary' array
@@ -98,10 +86,9 @@ function removeBook (bookCard) {
     bookCard.remove();
 }
 
-
-function renderBookCard (book) {
+function renderBookCard(book) {
     const div = document.createElement("div");
-    const h4 = document.createElement("h4");
+    const h3 = document.createElement("h3");
     const ul = document.createElement("ul");
     const author = document.createElement("li");
     const pageno = document.createElement("li");
@@ -110,47 +97,47 @@ function renderBookCard (book) {
     const editButton = document.createElement("button");
 
     // define content of card
-    h4.innerText = book.title;
+    h3.innerText = book.title;
     author.innerText = `Author: ${book.author}`;
-    pageno.innerText = `Number of pages: ${book.pageno}`;
-    read.innerText = getReadStatus(book);
-    deleteButton.innerText = 'Remove from library';
-    editButton.innerText = 'Edit book';
-    
+    pageno.innerText = `Number of Pages: ${book.pageno}`;
+    read.innerText = getread(book);
+    deleteButton.innerText = 'Remove Book';
+    editButton.innerText = 'Edit Book Info';
+
     // append card to library and add class "book"
     library.appendChild(div);
     div.classList.add("book");
     deleteButton.classList.add("delete-button");
     editButton.classList.add("edit-button");
-    h4.classList.add("title");
+    h3.classList.add("title");
     author.classList.add("author");
     pageno.classList.add("pageno");
     read.classList.add("read");
 
     // append content to card
     ul.append(author, pageno, read);
-    div.append(h4, ul, editButton, deleteButton);
+    div.append(h3, ul, editButton, deleteButton);
 
     // Click editButton to bring up modifyBookForm
-    editButton.addEventListener("click", ()=> showModifyForm(book));
+    editButton.addEventListener("click", () => showModifyForm(book));
 
     // Click deleteButton to remove book from library
-    deleteButton.addEventListener("click", ()=> removeBook(div));
+    deleteButton.addEventListener("click", () => removeBook(div));
 }
 
 //Click button to bring up newBookForm
-document.querySelector(".new-book-btn").addEventListener("click", ()=> newBookForm.showModal());
+document.querySelector(".new-book-btn").addEventListener("click", () => newBookForm.showModal());
 
 //Click button to add book to library
-newBookForm.querySelector(".submit-form-btn").addEventListener("click", (event)=> {
-    if(newBookForm.querySelector("#title").value !== ''){
+newBookForm.querySelector(".submit-form-btn").addEventListener("click", (event) => {
+    if (newBookForm.querySelector("#title").value !== '') {
         event.preventDefault();
         addBookToLibrary();
-    }    
+    }
 });
 
 //Click button to save modified book to library
-modifyBookForm.querySelector(".submit-form-btn").addEventListener("click", (event)=> {
+modifyBookForm.querySelector(".submit-form-btn").addEventListener("click", (event) => {
     event.preventDefault();
     modifyBook();
 });
